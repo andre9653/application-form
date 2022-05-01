@@ -1,6 +1,4 @@
-const fs = require('fs').promises;
-
-const filePath = 'formsSubmit.txt';
+const FormsSubmit = require('../model/FormsSubmitModel');
 
 class Result {
   constructor() {
@@ -23,16 +21,16 @@ class Result {
 }
 
 module.exports = {
-  async get(req, res) {
-    const readFile = await fs.readFile(filePath);
-    const jsonParse = JSON.parse(readFile);
-    return res.status(200).json(jsonParse);
+  // Faz leitura do arquivo e retorna um json.
+  async get() {
+    const jsonParse = JSON.parse(await FormsSubmit.get());
+    return jsonParse;
   },
-  async store(req, res) {
-    const responses = { ...req.body };
 
+  // Adiciona um resultado de formulário ao database
+  async store(responses) {
     const result = new Result();
-
+    // Itero pelas respostas gerando um efeito colateral de acordo com a regra de negocio.
     Object.values(responses).forEach((response) => {
       switch (response) {
         case 'Sim':
@@ -51,13 +49,7 @@ module.exports = {
           break;
       }
     });
-
-    const readFile = await fs.readFile(filePath);
-    const jsonParse = JSON.parse(readFile);
-    jsonParse.push({ ...responses, ...result });
-    const jsonStringify = JSON.stringify(jsonParse, null, 2);
-    await fs.writeFile(filePath, jsonStringify);
-
-    return res.status(201).json(result);
+    // retorna a resposta trada para o cliente.
+    return FormsSubmit.store({ ...responses, ...result });
   },
 };

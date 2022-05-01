@@ -1,5 +1,5 @@
 const express = require('express');
-const FormsSubmit = require('./controller/FormsSubmit');
+const FormsSubmit = require('./controller/FormsSubmitController');
 
 const routes = express.Router();
 
