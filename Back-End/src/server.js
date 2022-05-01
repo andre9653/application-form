@@ -1,7 +1,7 @@
 require('express-async-errors');
 const express = require('express');
-require('dotenv').config();
 const routes = require('./routes');
+require('dotenv').config();
 
 const { PORT, HOST } = process.env;
 

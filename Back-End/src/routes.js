@@ -1,6 +1,9 @@
 const express = require('express');
 
 const routes = express.Router();
+const fs = require('fs').promises;
+
+const filePath = 'formsSubmit.txt';
 
 class Result {
   constructor() {
@@ -22,7 +25,13 @@ class Result {
   }
 }
 
-routes.post('/submit', (req, res) => {
+routes.get('/', async (req, res) => {
+  const readFile = await fs.readFile(filePath);
+  const jsonParse = JSON.parse(readFile);
+  return res.status(200).json(jsonParse);
+});
+
+routes.post('/submit', async (req, res) => {
   const responses = { ...req.body };
 
   const result = new Result();
@@ -42,10 +51,17 @@ routes.post('/submit', (req, res) => {
         result.positive(2);
         break;
       default:
-        console.log('invalid');
         break;
     }
   });
+
+  const readFile = await fs.readFile(filePath);
+  const jsonParse = JSON.parse(readFile);
+  jsonParse.push({ ...responses, ...result });
+  const jsonStringify = JSON.stringify(jsonParse, null, 2);
+  await fs.writeFile(filePath, jsonStringify);
+
+  return res.status(201).json(result);
 });
 
 module.exports = routes;
