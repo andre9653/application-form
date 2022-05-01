@@ -32,17 +32,17 @@ module.exports = {
     const result = new Result();
     // Itero pelas respostas gerando um efeito colateral de acordo com a regra de negocio.
     Object.values(responses).forEach((response) => {
-      switch (response) {
-        case 'Sim':
+      switch (response.toLowerCase()) {
+        case 'sim':
           result.positive();
           break;
-        case 'Não':
+        case 'não':
           result.negative();
           break;
-        case 'Não Sei':
+        case 'não sei':
           result.notAvailed();
           break;
-        case 'Agora!!':
+        case 'agora!!':
           result.positive(2);
           break;
         default:
