@@ -64,6 +64,16 @@ label {
   flex-direction: column;
 }
 
+.selected {
+  background-color: rgb(76, 187, 76);
+}
+.selected::before {
+  background-color: rgb(76, 187, 76);
+
+}
+
 .count {
   align-self: flex-end;
+  margin: 0.5em 0.5em;
+  font-weight: 600;
 }

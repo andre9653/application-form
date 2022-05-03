@@ -7,7 +7,7 @@ function selectOption() {
     button.addEventListener('click', ({ target }) => {
       const storage = JSON.parse(localStorage.forms);
       const keyForm = target.parentNode.classList[1];
-      const selected = document.querySelector('.selected');
+      const selected = document.querySelector(`.${keyForm} .selected`);
       if (selected) selected.classList.remove('selected');
       storage[keyForm] = target.innerText;
       localStorage.forms = JSON.stringify(storage, 2);
@@ -25,7 +25,11 @@ function selectOption() {
     const keyForm = target.parentNode.classList[1];
     const textValue = document.querySelector('textarea').value;
     const count = document.querySelector('.count');
-    count.innerText = textValue.length;
+    const len = textValue.length;
+    count.innerText = len;
+    if (len < 15) count.style.color = 'yellow';
+    if (len >= 15) count.style.color = 'blue';
+    if (len === 200) count.style.color = 'red';
     storage[keyForm] = textValue;
     localStorage.forms = JSON.stringify(storage, 2);
   });
