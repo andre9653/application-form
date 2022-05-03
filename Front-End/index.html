@@ -13,22 +13,22 @@
     <h1>Coleta GRX</h1>
     <form class="d-flex flex-column mb-3 bd-highlight">
       <label class="bd-highlight" for="ability">
-        <p>1) Você se considera bom em lógica?</p>
         <div class="container pergunta1">
-          <button type="button" class="btn btn-primary">Sim</button>
-          <button type="button" class="btn btn-primary">Não</button>
+          <p>1) Você se considera bom em lógica?</p>
+          <button type="button" class="btn">Sim</button>
+          <button type="button" class="btn">Não</button>
         </div>
       </label>
       <label for="challenges">
-        <p>2) Gosta de aprender com desafios?</p>
         <div class="container pergunta2">
-          <button type="button" class="btn btn-primary">Sim</button>
-          <button type="button" class="btn btn-primary">Não</button>
+          <p>2) Gosta de aprender com desafios?</p>
+          <button type="button" class="btn">Sim</button>
+          <button type="button" class="btn">Não</button>
         </div>
       </label>
       <label for="interest">
-        <p>3) Gostaria de fazer parte da GRX?</p>
         <div class="container pergunta3">
+          <p>3) Gostaria de fazer parte da GRX?</p>
           <select name="interest" id="interest" class="btn btn-primary">
             <option selected value="">Selecione uma resposta</option>
             <option value="Sim">Sim</option>
@@ -39,17 +39,18 @@
         </div>
       </label>
       <label for="justify">
-        <p>4) Por favor, Justifique a resposta anterior.</p>
         <div class="container pergunta4 form d-flex flex-column mb-3">
-          <textarea
-            class="form-control" name="justify"
-            id="justify" cols="30" rows="10"
-            maxlength="200"
-          ></textarea>
-          <span class="count">0</span>
+          <p class="p-textarea">4) Por favor, Justifique a resposta anterior.</p>
+          <span class="warning">(min 15 caracteres e máximo 200)</span>
+            <textarea
+              class="form-control text-textarea" name="justify"
+              id="justify" cols="30" rows="10"
+              maxlength="200"
+            ></textarea>
+            <span class="count">0</span>
         </div>
       </label>
-      <button type="button" class="btn btn-primary">Enviar</button>
+      <button type="button" id="submit" class="btn btn-primary">Enviar</button>
     </form>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
