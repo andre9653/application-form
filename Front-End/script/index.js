@@ -35,6 +35,22 @@ function selectOption() {
   });
 }
 
+function addElement(element, name, result, percentage) {
+  const pElement = document.createElement('p');
+  pElement.innerText = `${name}: ${result}`;
+  const col1 = document.createElement('div');
+  col1.append(pElement);
+  const col2 = document.createElement('div');
+  col2.classList.add('result-percent');
+  col2.innerHTML = `${percentage}%`;
+  element.appendChild(col1);
+  element.appendChild(col2);
+}
+
+function calcPercent(total, num) {
+  return (num * 100) / total;
+}
+
 function handleSubmit() {
   const button = document.querySelector('#submit');
   button.addEventListener('click', async () => {
@@ -55,9 +71,42 @@ function handleSubmit() {
 
     if (ok) {
       const url = 'http://localhost:3000/submit';
-      const request = await fetch(url, { method: post, body: storage });
-      const response = await request.json();
-      console.log(response);
+      const request = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(storage),
+      });
+      const {
+        QuantidadePositiva, QuantidadeNegativa, QuantidadeNaoAvaliada,
+      } = await request.json();
+      const main = document.querySelector('main');
+      const quantidadePositivaElement = document.createElement('div');
+      quantidadePositivaElement.name = QuantidadePositiva;
+      quantidadePositivaElement.classList.add('quantidade-positiva');
+
+      const quantidadeNegativaElement = document.createElement('div');
+      quantidadeNegativaElement.name = QuantidadeNegativa;
+      quantidadeNegativaElement.classList.add('quantidade-negativa');
+
+      const quantidadeNaoAvaliadaElement = document.createElement('div');
+      quantidadeNaoAvaliadaElement.name = QuantidadeNaoAvaliada;
+      quantidadeNaoAvaliadaElement.classList.add('quantidade-nao-avaliada');
+
+      addElement(quantidadePositivaElement, 'Quantidade positiva', QuantidadePositiva, calcPercent(4, QuantidadePositiva));
+      addElement(quantidadeNegativaElement, 'Quantidade negativa', QuantidadeNegativa, calcPercent(4, QuantidadeNegativa));
+      addElement(quantidadeNaoAvaliadaElement, 'Quantidade não avaliada', QuantidadeNaoAvaliada, calcPercent(4, QuantidadeNaoAvaliada));
+
+      const arrayOfElements = [
+        quantidadePositivaElement,
+        quantidadeNegativaElement,
+        quantidadeNaoAvaliadaElement,
+      ];
+
+      arrayOfElements.sort((a, b) => Number(b.name) - Number(a.name));
+      arrayOfElements.forEach((element) => main.appendChild(element));
     }
   });
 }
