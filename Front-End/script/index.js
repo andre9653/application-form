@@ -1,4 +1,23 @@
-import { calcPercent, sum } from '../utils';
+async function requestForms(data) {
+  const url = 'http://localhost:3000/submit';
+  const request = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  return request.json();
+}
+
+function calcPercent(total, num) {
+  return (num * 100) / total;
+}
+
+function sum(...args) {
+  return args.reduce((acc, crr) => acc + crr);
+}
 
 /* eslint-disable no-undef */
 function selectOption() {
@@ -68,18 +87,9 @@ function handleSubmit() {
     }
 
     if (ok) {
-      const url = 'http://localhost:3000/submit';
-      const request = await fetch(url, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(storage),
-      });
       const {
         QuantidadePositiva, QuantidadeNegativa, QuantidadeNaoAvaliada,
-      } = await request.json();
+      } = await requestForms(storage);
       const main = document.querySelector('.result-finish');
       const quantidadePositivaElement = document.createElement('div');
       quantidadePositivaElement.name = QuantidadePositiva;

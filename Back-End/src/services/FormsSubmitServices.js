@@ -50,6 +50,6 @@ module.exports = {
       }
     });
     // retorna a resposta trada para o cliente.
-    return FormsSubmit.store({ ...responses, ...result });
+    return FormsSubmit.store(result);
   },
 };
