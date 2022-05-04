@@ -1,3 +1,5 @@
+import { calcPercent, sum } from '../utils';
+
 /* eslint-disable no-undef */
 function selectOption() {
   const buttons = document.querySelectorAll('.container button');
@@ -42,13 +44,9 @@ function addElement(element, name, result, percentage) {
   col1.append(pElement);
   const col2 = document.createElement('div');
   col2.classList.add('result-percent');
-  col2.innerHTML = `${percentage}%`;
+  col2.innerHTML = `<p>${percentage.toFixed(2)}%</p>`;
   element.appendChild(col1);
   element.appendChild(col2);
-}
-
-function calcPercent(total, num) {
-  return (num * 100) / total;
 }
 
 function handleSubmit() {
@@ -82,22 +80,28 @@ function handleSubmit() {
       const {
         QuantidadePositiva, QuantidadeNegativa, QuantidadeNaoAvaliada,
       } = await request.json();
-      const main = document.querySelector('main');
+      const main = document.querySelector('.result-finish');
       const quantidadePositivaElement = document.createElement('div');
       quantidadePositivaElement.name = QuantidadePositiva;
-      quantidadePositivaElement.classList.add('quantidade-positiva');
+      quantidadePositivaElement.classList.add('result-info');
 
       const quantidadeNegativaElement = document.createElement('div');
       quantidadeNegativaElement.name = QuantidadeNegativa;
-      quantidadeNegativaElement.classList.add('quantidade-negativa');
+      quantidadeNegativaElement.classList.add('result-info');
 
       const quantidadeNaoAvaliadaElement = document.createElement('div');
       quantidadeNaoAvaliadaElement.name = QuantidadeNaoAvaliada;
-      quantidadeNaoAvaliadaElement.classList.add('quantidade-nao-avaliada');
+      quantidadeNaoAvaliadaElement.classList.add('result-info');
 
-      addElement(quantidadePositivaElement, 'Quantidade positiva', QuantidadePositiva, calcPercent(4, QuantidadePositiva));
-      addElement(quantidadeNegativaElement, 'Quantidade negativa', QuantidadeNegativa, calcPercent(4, QuantidadeNegativa));
-      addElement(quantidadeNaoAvaliadaElement, 'Quantidade não avaliada', QuantidadeNaoAvaliada, calcPercent(4, QuantidadeNaoAvaliada));
+      const total = sum(QuantidadePositiva, QuantidadeNegativa, QuantidadeNaoAvaliada);
+
+      const totalElement = document.createElement('div');
+      totalElement.classList.add('total');
+      totalElement.innerHTML = `<p>${total}</p>`;
+
+      addElement(quantidadePositivaElement, 'Quantidade positiva', QuantidadePositiva, calcPercent(total, QuantidadePositiva));
+      addElement(quantidadeNegativaElement, 'Quantidade negativa', QuantidadeNegativa, calcPercent(total, QuantidadeNegativa));
+      addElement(quantidadeNaoAvaliadaElement, 'Quantidade não avaliada', QuantidadeNaoAvaliada, calcPercent(total, QuantidadeNaoAvaliada));
 
       const arrayOfElements = [
         quantidadePositivaElement,
