@@ -1,9 +1,21 @@
 # Desafio coleta - GRX
 
+
+## Como iniciar aplicação
+
+É necessário ter `Node` instalado para poder rodar os servidores.
+
+Entre nas pastas `Front-End` e `Back-End` e rode os seguintes comandos em ambas:
+
+```
+npm install
+npm start
+```
 ## Planejamento
 
-Você pode acompanhar um pouco de como foi meu planejamento com o [kanban](https://pear-manatee-c83.notion.site/404cf7d3465f4ab59f9cf6f88cfc1b83?v=03481d3cef56455eb167692a71236812) desse projeto
+Você pode acompanhar um pouco de como foi meu planejamento com o [kamban](https://pear-manatee-c83.notion.site/404cf7d3465f4ab59f9cf6f88cfc1b83?v=03481d3cef56455eb167692a71236812) desse projeto
 
+---
 ## Ferramentas utilizadas
 
 Foram utilizados nesse projeto as seguintes ferramentas:
