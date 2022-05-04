@@ -1,0 +1,142 @@
+* {
+  font-size: 16px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: rgb(236, 240, 255);
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 1em;
+  text-align: center;
+  align-items: stretch;
+}
+
+form {
+  border-radius: 0.5em;
+  border: 1px solid silver;
+  margin: 0.5em;
+  padding: 0.5em;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: 600;
+  padding: 1em;
+}
+
+p, button, select {
+  font-size: 1.2em;
+  padding: 0.5em;
+  margin-left: 0.7em;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  margin-bottom: 0.8em;
+}
+
+.container select {
+  border-radius: 0.5em;
+  flex-grow: 1;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1), 0 6px 20px 0 rgba(0,0,0,0.19);
+  margin-bottom: 1em;
+}
+
+.container button {
+  background: #0d6dfd91;
+  margin-left: 0.3em;
+  border-radius: 0.5em;
+  /* border: none; */
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1), 0 6px 20px 0 rgba(0,0,0,0.19);
+  margin-bottom: 1em;
+  flex-grow: 1;
+}
+
+label {
+  flex-direction: column;
+}
+
+.selected {
+  background-color: #0d6efd !important;
+}
+
+.count {
+  align-self: flex-end;
+  background: #0d6efd;
+  border-radius: 10%;
+  color: yellow;
+  font-weight: 600;
+  margin: 0.5em 0.5em;
+  padding: 0.3em;
+}
+
+.p-textarea {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.warning {
+  color: rgba(0, 0, 0, 0.527);
+}
+
+.text-textarea {
+  margin-top: 0.5em;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.problem {
+  border: 1px solid red;
+  border-radius: 5px;
+}
+
+.result-finish {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-finish .result-info {
+  display: flex;
+}
+
+.result-finish .result-info div {
+  width: 100%;
+  flex-grow: 1;
+  margin: 0.5em;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+
+@media (min-width: 768px) {
+
+  main {
+    align-items: center;
+  }
+
+  main form, .result-finish {
+    width: 60%;
+  }
+
+  .container {
+    display: block;
+  }
+
+  .container button, .container select,  .pergunta4 {
+    width: 70%;
+  }
+
+}
